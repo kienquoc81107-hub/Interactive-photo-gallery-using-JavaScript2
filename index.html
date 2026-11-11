@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Photo Gallery</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        #image {
+            width: 500px;
+            height: 350px;
+            max-width: 100%;
+            margin: 20px auto;
+            background-size: cover;
+            background-position: center;
+            border: 2px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px black;
+        }
+
+        .thumb {
+            width: 150px;
+            height: 110px;
+            object-fit: cover;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        .thumb:focus {
+            outline: 4px solid blue;
+            outline-offset: 3px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Interactive Photo Gallery</h1>
+
+    <div id="image" role="status" aria-live="polite">
+        Hover over an image below to display here.
+    </div>
+
+    <div id="gallery">
+
+        <img class="thumb"
+             src="https://picsum.photos/id/10/500/350"
+             alt="A beautiful green forest"
+             onmouseover="upDate(this)"
+             onmouseleave="undo()"
+             onfocus="upDate(this)"
+             onblur="undo()">
+
+        <img class="thumb"
+             src="https://picsum.photos/id/20/500/350"
+             alt="A modern workspace with a desk"
+             onmouseover="upDate(this)"
+             onmouseleave="undo()"
+             onfocus="upDate(this)"
+             onblur="undo()">
+
+        <img class="thumb"
+             src="https://picsum.photos/id/30/500/350"
+             alt="A peaceful beach landscape"
+             onmouseover="upDate(this)"
+             onmouseleave="undo()"
+             onfocus="upDate(this)"
+             onblur="undo()">
+
+        <img class="thumb"
+             src="https://picsum.photos/id/40/500/350"
+             alt="A beautiful mountain landscape"
+             onmouseover="upDate(this)"
+             onmouseleave="undo()"
+             onfocus="upDate(this)"
+             onblur="undo()">
+
+        <img class="thumb"
+             src="https://picsum.photos/id/50/500/350"
+             alt="A lovely flower in nature"
+             onmouseover="upDate(this)"
+             onmouseleave="undo()"
+             onfocus="upDate(this)"
+             onblur="undo()">
+
+        <img class="thumb"
+             src="https://picsum.photos/id/60/500/350"
+             alt="A beautiful natural landscape"
+             onmouseover="upDate(this)"
+             onmouseleave="undo()"
+             onfocus="upDate(this)"
+             onblur="undo()">
+
+    </div>
+
+    <script>
+
+        const imageDiv = document.getElementById('image');
+
+        const originalText = 'Hover over an image below to display here.';
+
+        function upDate(previewPic) {
+
+            console.log('upDate được gọi');
+
+            console.log('alt:', previewPic.alt);
+
+            console.log('src:', previewPic.src);
+
+            imageDiv.textContent = previewPic.alt;
+
+            imageDiv.style.backgroundImage = `url("${previewPic.src}")`;
+        }
+
+        function undo() {
+
+            console.log('undo được gọi');
+
+            imageDiv.style.backgroundImage = '';
+
+            imageDiv.textContent = originalText;
+        }
+
+        // Add tabindex to all images
+        function addTabFocus() {
+
+            console.log('addTabFocus được gọi');
+
+            const images = document.querySelectorAll('.thumb');
+
+            for (let i = 0; i < images.length; i++) {
+
+                images[i].setAttribute('tabindex', '0');
+
+                console.log('Tabindex added to image:', i + 1);
+            }
+        }
+
+        // Call addTabFocus when the page loads
+        window.addEventListener('load', addTabFocus);
+
+    </script>
+
+</body>
+</html>
